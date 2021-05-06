@@ -1,0 +1,81 @@
+tete([H|_], H).
+
+reste([_|R], R).
+
+vide(L):- L=[].
+
+element(X,[X|_]).
+element(X,[_|R]):- element(X, R).
+
+dernier([X],X).
+dernier([_|R],X):- dernier(R,X).
+
+longueur([],0).
+longueur([_|R],Lg):-longueur(R,Lg2), Lg is Lg2+1.
+
+nombre([],_,0).
+nombre([X|R],X,N):- nombre(R,X,N2), N is N2+1.
+nombre([X|R],Y,N):- dif(X,Y), nombre(R,Y,N2), N is N2.
+
+concat([],L,L).
+concat([H|R],L2,[H|L3]):- concat(R,L2,L3).
+
+inverse([],[]).
+inverse([H|R],L):- inverse(R,L2), concat(L2,[H],L).
+
+debute_par(_,[]).
+debute_par([H|R1],[H|R2]):-debute_par(R1,R2).
+
+sous_liste([H|R1],[H|R2]):- debute_par(R1,R2),!.
+sous_liste([_|R1],R2):- sous_liste(R1,R2).
+
+retire_element([X|R],X,R).
+retire_element([H|R1],X,[H|R2]):- retire_element(R1,X,R2), dif(H,X).
+
+partition(_,[],[],[]).
+partition(X,[T|R],[T|L1],L2):- T =< X, partition(X,R,L1,L2).
+partition(X,[T|R],L1,[T|L2]):- T > X, partition(X,R,L1,L2).
+
+tri([],[]).
+tri([X|R],L):- partition(X,R,L1,L2), tri(L1,L1T), tri(L2,L2T), concat(L1T,[X|L2T],L).
+
+retire_elements([],_,[]).
+retire_elements([X|R],X,L2):- retire_elements(R,X,L2).
+retire_elements([H|R1],X,[H|L2]):- retire_elements(R1,X,L2), X \= H.
+	
+retire_doublons([],[]).
+retire_doublons([H|R1],[H|E3]):- retire_elements(R1,H,E2), retire_doublons(E2,E3).
+
+	
+% Version facile
+union(E1,E2,E):- concat(E1,E2,E3), retire_doublons(E3,E).
+	
+% Version plus élégante
+union2([],E2,E2).
+union2([T|R],E2,E):- element(E2,T), union2(R,E2,E).
+union2([T|R],E2,[T|E]):- \+ element(E2,T), union2(R,E2,E).
+	
+intersection([],_,[]).
+intersection([T|R],E2,[T|E]):- element(E2,T), intersection(R,E2,E).
+intersection([T|R],E2,E):- \+ element(E2,T), intersection(R,E2,E).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

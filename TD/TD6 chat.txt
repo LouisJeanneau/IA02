@@ -1,0 +1,27 @@
+De Baptiste Viera à tout le monde:  11:58 AM
+cela fonctionne pour cousin ou pas du tout ?
+cousin (X,Y) :- fils(X,Z), enfant(Y,Z1), memeParents(Z,Z1), dif(Z,Z1).
+
+De Sacha Benarroch à tout le monde:  12:01 PM
+maratre(X,Y) :- femme(X), pere(Z,Y), not mere(X,Y).
+
+De Claire Taupin à tout le monde:  12:02 PM
+j'ai fait pareil
+ah non
+maratre(X,Y) :- epouse(Y,Z), parent(Z,X), not mere(X,Y).
+ah mince oui
+okok
+
+De Sacha Benarroch à tout le monde:  12:02 PM
+maratre(X,Y) :- femme(X), epouse(X,Z), pere(Z,Y), not mere(X,Y).
+
+De Robin Monje à tout le monde:  12:02 PM
+maratre(X,Y) :- parent(Y,Z), epouse(X,Z), parent(Y,U), dif(U,Z), dif (U,X), dif(X,Y).
+
+De Sacha Benarroch à tout le monde:  12:03 PM
+maratre(X,Y) :- femme(X), epouse(X,Z), pere(Z,Y), mere(T,Y), dif(T,X).
+Merci !
+
+De Claire Taupin à tout le monde:  12:04 PM
+maratre(X,Y) :- epouse(X,Z), parent(Z,X), mere(T,Y), dif(X,T).
+mince c'est parent(Z,Y)

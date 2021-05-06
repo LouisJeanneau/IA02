@@ -1,0 +1,11 @@
+1. Il y a 729 var minimum (9³)
+2. at_least_one : au moins une valeur est vraie
+   unique : une unique valeur max
+   rapport avec un xor : on veut exactement un vrai parmis chaque cause, comme un xor
+   	not(1;1=1) or not(1;1=2)
+	not(1;1=1) or not(1;1=3)
+	not(1;1=1) or not(1;1=4)
+	...
+	not(1;1=8) or not(1;1=9)
+3. cf doc
+4. on met à true certaines variable
